@@ -15,6 +15,7 @@ class adapterRecView (private  val listWayang : ArrayList<wayang>) : RecyclerVie
 
     interface OnItemClickCallback {
         fun onItemClicked(data:wayang)
+        fun delData(pos:Int)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
@@ -26,6 +27,7 @@ class adapterRecView (private  val listWayang : ArrayList<wayang>) : RecyclerVie
         var _karakterWayang = itemView.findViewById<TextView>(R.id.karakterWayang)
         var _deskripsiWayang = itemView.findViewById<TextView>(R.id.deskripsiWayang)
         var _gambarWayang = itemView.findViewById<ImageView>(R.id.gambarWayang)
+        val _btnHapus = itemView.findViewById<TextView>(R.id.btnHapus)
 
     }
 
@@ -47,6 +49,10 @@ class adapterRecView (private  val listWayang : ArrayList<wayang>) : RecyclerVie
         Picasso.get().load(wayang.foto).into(holder._gambarWayang)
         holder._gambarWayang.setOnClickListener{
             onItemClickCallback.onItemClicked(listWayang[position])
+        }
+
+        holder._btnHapus.setOnClickListener{
+            onItemClickCallback.delData(position)
         }
 
     }
